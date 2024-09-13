@@ -1,40 +1,39 @@
 .circle {
-    width: 50px;
-    height: 50px;
-    background-color: #D2E0FB;
-    border-radius: 50%;
-    align-self: flex-end;
+  width: 50px;
+  height: 50px;
+  background-color: #d2e0fb;
+  border-radius: 50%;
+  align-self: flex-end;
 }
 
 .bro {
-    position: fixed;
-    bottom: 6rem;
-    left: 1rem;
-    display: flex;
-    gap: 1rem;
-    
+  position: fixed;
+  bottom: 6rem;
+  left: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .bro > p {
-    width: 40%;
-    background-color: #D2E0FB;
-    padding: 1rem;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px;
-    color: #117554;
+  width: 40%;
+  background-color: #d2e0fb;
+  padding: 1rem;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  color: #117554;
 }
 
 .interviewer {
-    position: fixed;
-    display: flex;
-    top: 40%;
-    right: 1rem;
-    gap: 1rem;
-    justify-content: end;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: wheat;
+  width: 80%;
 }
 
-.interviewer > p {
+/* .interviewer > p {
     border-bottom-left-radius: 12px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
@@ -42,9 +41,8 @@
     background-color: #D2E0FB;
     padding: 1rem;
     color: #021817d8;
-}
+} */
 
-.interviewer > .circle {
+/* .interviewer > .circle {
     align-self: flex-start;
-}
-
+} */

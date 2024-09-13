@@ -39,6 +39,7 @@
 
 .control-container {
   background-color: #b366f9e6;
+  /* background-color: #27e5f3; */
   padding: 20px;
   border-radius: 50%;
   display: flex;
@@ -53,6 +54,10 @@
 }
 
 #leave-btn {
+  background-color: #f52d59;
+}
+
+#mic-btn {
   background-color: #f52d59;
 }
 

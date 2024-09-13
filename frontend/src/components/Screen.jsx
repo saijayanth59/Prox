@@ -20,10 +20,7 @@ const constraints = {
   },
 };
 
-export default function Screen({
-  startListening,
-  stopListening,
-}) {
+export default function Screen({ startListening, stopListening }) {
   const [localStream, setLocalStream] = useState(null);
   const [listening, setListening] = useState(false);
 
@@ -44,17 +41,21 @@ export default function Screen({
       .find((track) => track.kind === "video");
     if (videoTrack.enabled) {
       videoTrack.enabled = false;
+      document.getElementById("user-2").style.display = "none";
       document.getElementById("camera-btn").style.backgroundColor = "#f52d59";
     } else {
       videoTrack.enabled = true;
+      document.getElementById("user-2").style.display = "block";
       document.getElementById("camera-btn").style.backgroundColor = "#b366f9e6";
     }
   };
 
   const toggleMic = () => {
     if (listening) {
+      document.getElementById("mic-btn").style.backgroundColor = '#f52d59';
       stopListening();
     } else {
+      document.getElementById("mic-btn").style.backgroundColor = '#b366f9e6';      
       startListening();
     }
     setListening((prev) => !prev);
@@ -70,6 +71,7 @@ export default function Screen({
           autoPlay
           playsInline
         ></video> */}
+
         <video
           src=""
           id="user-2"
@@ -90,7 +92,7 @@ export default function Screen({
         >
           <img src={micImg} alt="" />
         </div>
-        <a href="lob.html">
+        <a href="">
           <div className="control-container" id="leave-btn">
             <img src={phoneImg} alt="" />
           </div>

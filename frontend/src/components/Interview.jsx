@@ -56,7 +56,7 @@ const Interview = () => {
           prev +
           "Interviewee: " +
           transcript +
-          "\nInterview: " +
+          "\nInterviewer: " +
           res.data.question
         );
       });
@@ -79,16 +79,16 @@ const Interview = () => {
         startListening={startListening}
         stopListening={handleStopAndSpeak}
       />
-      <div className="bro">
+      {/* <div className="bro">
         <div className="circle"></div>
         <p>{transcript}</p>
-        {/* <TypeWriter text={transcript}/> */}
-      </div>
+        <TypeWriter text={transcript}/>
+      </div> */}
       <div className="interviewer">
-        <p>{question}</p>{" "}
+        <h1>{question}</h1>{" "}
         {/* <ReactTypingEffect text={[question]} /> */}
         {/* <TypeWriter content={question}/> */}
-        <div className="circle"></div>
+        {/* <div className="circle"></div> */}
       </div>
     </div>
   );
