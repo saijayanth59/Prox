@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import axios from "axios";
 import { useVoiceToText } from "react-speakup";
 import TextToVoice from "./TextToVoice";
@@ -9,6 +9,8 @@ const Interview = () => {
     continuous: true,
     lang: "en-US",
   });
+
+  const [qcount, setQcount] = useState(0);
 
   const [url, setUrl] = useState("");
 
@@ -34,7 +36,7 @@ const Interview = () => {
         return prev + "interviewer: " + res.data.question;
       });
       // handleSpeak(res.data.question);
-      updateAudio("http://localhost:8000/stream-mp3");
+      // updateAudio("http://localhost:8000/stream-mp3");
       setQuestion(res.data.question);
     };
     setTimeout(() => fetchQ(), 2000);
@@ -56,9 +58,16 @@ const Interview = () => {
           res.data.question
         );
       });
-      setQuestion(res.data.question);
+      if (qcount < 2) {
+        setQuestion(res.data.question);
+      }
+      else {
+        setQuestion(await axios.post("http://localhost:8000/get-score", {
+          conversation: `${conversation}`
+        }))}
+      setQcount(prev => prev + 1);
       // handleSpeak(res.data.question)
-      updateAudio("http://localhost:8000/stream-mp3");
+      // updateAudio("http://localhost:8000/stream-mp3");
       reset();
     };
     stopListening();  

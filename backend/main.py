@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.middleware.cors import CORSMiddleware
-from gtts import gTTS
+# from gtts import gTTS
 
 
 
@@ -85,3 +85,16 @@ async def stream_mp3():
             yield from file
 
     return StreamingResponse(iterfile(), media_type="audio/mpeg")
+
+
+@app.get("/get-score")
+async def get_score(request: Request):
+    conversation = await request.json()
+    score = model.generate_content(f"""Here's a conversation of an interview for a data analyst postion.
+                               Your job is to carefully analyze the questions and answers and rate the Interviewee on a scale of 10.
+                               
+                               Just respond with a floating point number based on the candidate's answers.
+                               
+                               Here's the conversation
+                               {conversation}""")
+    return {"score": score.text}
