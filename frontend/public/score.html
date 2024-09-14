@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Performance Dashboard</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Bar Chart */
+        .bar-chart {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar {
+            width: 20%;
+            background-color: #4CAF50;
+            border-radius: 5px;
+            margin-right: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        /* Circular Progress Bar */
+        .progress-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(#4CAF50 var(--value), #e0e0e0 0deg);
+            border-radius: 50%;
+        }
+
+        .progress-circle::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Score Card */
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar div {
+            height: 20px;
+            background-color: #4CAF50;
+            border-radius: 20px;
+            width: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interview Performance Dashboard</h1>
+
+<div class="dashboard">
+
+    <!-- Card 1: Number of Interviews -->
+    <div class="card">
+        <h2>Number of Interviews</h2>
+        <div class="bar-chart">
+            <div class="bar" style="height: 80%">8</div>
+            <div class="bar" style="height: 60%">6</div>
+            <div class="bar" style="height: 90%">9</div>
+            <div class="bar" style="height: 70%">7</div>
+            <div class="bar" style="height: 50%">5</div>
+        </div>
+    </div>
+
+    <!-- Card 2: Success Rate -->
+    <div class="card">
+        <h2>Success Rate</h2>
+        <div class="progress-circle" data-label="75%" style="--value: 270deg;"></div>
+    </div>
+
+    <!-- Card 3: Average Score -->
+    <div class="card">
+        <h2>Average Score</h2>
+        <div class="score" id="averageScore">85</div>
+    </div>
+
+    <!-- Card 4: Completion Rate -->
+    <div class="card">
+        <h2>Completion Rate</h2>
+        <div class="progress-bar">
+            <div style="width: 85%"></div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // Random numbers for bar chart
+    const bars = document.querySelectorAll('.bar');
+    bars.forEach(bar => {
+        const randomHeight = Math.floor(Math.random() * 91) + 10; // Random height between 10% and 100%
+        bar.style.height = `${randomHeight}%`;
+        bar.textContent = randomHeight / 10; // Display value in text inside bar
+    });
+
+    // Random success rate for circular progress bar
+    const successRate = Math.floor(Math.random() * 101); // Random percentage between 0 and 100
+    const progressCircle = document.querySelector('.progress-circle');
+    progressCircle.setAttribute('data-label', successRate + '%');
+    progressCircle.style.setProperty('--value', `${(successRate / 100) * 360}deg`);
+
+    // Random average score
+    const averageScore = Math.floor(Math.random() * 51) + 50; // Random score between 50 and 100
+    document.getElementById('averageScore').textContent = averageScore;
+
+    // Random completion rate for progress bar
+    const completionRate = Math.floor(Math.random() * 101); // Random percentage between 0 and 100
+    const progressBar = document.querySelector('.progress-bar div');
+    progressBar.style.width = `${completionRate}%`;
+</script>
+
+</body>
+</html>

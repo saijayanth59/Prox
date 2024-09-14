@@ -10,18 +10,20 @@ function App() {
   return (
     <>
       {!start ? (
-        <div className="start">
-          <InputFileUpload />
-          <Button
-            variant="contained"
-            style={{
-              fontSize: "1.3rem"
-            }}
-            onClick={() => setStart(true)}
-          >
-            Start interview
-          </Button>
-        </div>
+        <>
+          <div className="start">
+            <InputFileUpload />
+            <Button
+              variant="contained"
+              style={{
+                fontSize: "1.3rem",
+              }}
+              onClick={() => setStart(true)}
+            >
+              Start interview
+            </Button>
+          </div>
+        </>
       ) : (
         <Interview />
       )}

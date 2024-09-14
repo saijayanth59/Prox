@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interviewee Performance Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f6fa;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .progress-bar-container {
+            margin-top: 10px;
+        }
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .progress-bar div {
+            height: 20px;
+            background-color: #4CAF50;
+            width: 0;
+            border-radius: 10px;
+        }
+
+        /* Circular Progress */
+        .circular-progress {
+            width: 120px;
+            height: 120px;
+            background: conic-gradient(#4CAF50 var(--value), #e0e0e0 0deg);
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .circular-progress::before {
+            content: attr(data-label);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interviewee Performance Dashboard</h1>
+
+<div class="dashboard">
+    <!-- Card 1: Facial Expressions -->
+    <div class="card">
+        <h2>Facial Expressions</h2>
+        <div>
+            <p>Positive: <span id="positiveExpression">0%</span></p>
+            <p>Neutral: <span id="neutralExpression">0%</span></p>
+            <p>Negative: <span id="negativeExpression">0%</span></p>
+        </div>
+    </div>
+
+    <!-- Card 2: Gestures -->
+    <div class="card">
+        <h2>Gestures</h2>
+        <div class="circular-progress" data-label="0%" id="gestureProgress" style="--value: 0deg;"></div>
+    </div>
+
+    <!-- Card 3: Answer Accuracy -->
+    <div class="card">
+        <h2>Answer Accuracy</h2>
+        <div class="circular-progress" data-label="0%" id="accuracyProgress" style="--value: 0deg;"></div>
+    </div>
+
+    <!-- Card 4: Answered & Unanswered Questions -->
+    <div class="card">
+        <h2>Answered vs Unanswered</h2>
+        <p id="answeredQuestions">Answered: 0</p>
+        <p id="unansweredQuestions">Unanswered: 0</p>
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div id="questionProgress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card 5: Overall Score -->
+    <div class="card">
+        <h2>Overall Score</h2>
+        <div class="score" id="overallScore">0</div>
+    </div>
+</div>
+
+<script>
+    // Random percentage generation for facial expressions
+    const positiveExp = Math.floor(Math.random() * 51) + 50; // 50% to 100%
+    const neutralExp = Math.floor(Math.random() * 31) + 20; // 20% to 50%
+    const negativeExp = 100 - (positiveExp + neutralExp); // Remaining percentage
+
+    document.getElementById('positiveExpression').textContent = positiveExp + '%';
+    document.getElementById('neutralExpression').textContent = neutralExp + '%';
+    document.getElementById('negativeExpression').textContent = negativeExp + '%';
+
+    // Random percentage generation for gestures
+    const gesturePercentage = Math.floor(Math.random() * 101); // Random between 0 and 100
+    document.getElementById('gestureProgress').style.setProperty('--value', (gesturePercentage / 100) * 360 + 'deg');
+    document.getElementById('gestureProgress').setAttribute('data-label', gesturePercentage + '%');
+
+    // Random percentage generation for answer accuracy
+    const accuracyPercentage = Math.floor(Math.random() * 101); // Random between 0 and 100
+    document.getElementById('accuracyProgress').style.setProperty('--value', (accuracyPercentage / 100) * 360 + 'deg');
+    document.getElementById('accuracyProgress').setAttribute('data-label', accuracyPercentage + '%');
+
+    // Random generation of answered and unanswered questions
+    const totalQuestions = Math.floor(Math.random() * 11) + 5; // Random between 5 and 15 questions
+    const answeredQuestions = 3//Math.floor(Math.random() * totalQuestions); // Random number of answered questions
+    const unansweredQuestions = 1//totalQuestions - answeredQuestions;
+
+    document.getElementById('answeredQuestions').textContent = 'Answered: ' + answeredQuestions;
+    document.getElementById('unansweredQuestions').textContent = 'Unanswered: ' + unansweredQuestions;
+
+    const questionAnsweredPercentage = (answeredQuestions / 4) * 100;
+    document.getElementById('questionProgress').style.width = questionAnsweredPercentage + '%';
+
+    // Random overall score generation
+    const overallScore = Math.floor(Math.random() * 101); // Random between 0 and 100
+    document.getElementById('overallScore').textContent = overallScore;
+</script>
+
+</body>
+</html>

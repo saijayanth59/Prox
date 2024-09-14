@@ -1,4 +1,9 @@
-import React, { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import axios from "axios";
 import { useVoiceToText } from "react-speakup";
 import TextToVoice from "./TextToVoice";
@@ -38,13 +43,14 @@ const Interview = () => {
       // handleSpeak(res.data.question);
       // updateAudio("http://localhost:8000/stream-mp3");
       setQuestion(res.data.question);
+      setQcount((prev) => prev + 1);
     };
     setTimeout(() => fetchQ(), 2000);
   }, []);
 
   function handleStopAndSpeak() {
     // console.log(transcript);
-  
+
     const fetchData = async () => {
       const res = await axios.post("http://localhost:8000/get-question", {
         conversation: `${conversation} Interviewee: ${transcript}`,
@@ -58,47 +64,46 @@ const Interview = () => {
           res.data.question
         );
       });
-      if (qcount < 2) {
-        setQuestion(res.data.question);
-      }
-      else {
-        setQuestion(await axios.post("http://localhost:8000/get-score", {
-          conversation: `${conversation}`
-        }))}
-      setQcount(prev => prev + 1);
+      setQuestion(res.data.question);
+      setQcount((prev) => prev + 1);
+      console.log(qcount);
       // handleSpeak(res.data.question)
       // updateAudio("http://localhost:8000/stream-mp3");
       reset();
     };
-    stopListening();  
-    if(transcript){
+    stopListening();
+    if (transcript) {
       fetchData();
     }
   }
   console.log(conversation);
 
   return (
-    <div>
-      {/* <audio controls ref={audioRef}>
-        <source src={url} type="audio/mpeg" />
-      </audio> */}
-      <TextToVoice text={question} />
-      <Screen
-        startListening={startListening}
-        stopListening={handleStopAndSpeak}
-      />
-      {/* <div className="bro">
-        <div className="circle"></div>
-        <p>{transcript}</p>
-        <TypeWriter text={transcript}/>
-      </div> */}
-      <div className="interviewer">
-        <h1>{question}</h1>{" "}
-        {/* <ReactTypingEffect text={[question]} /> */}
-        {/* <TypeWriter content={question}/> */}
-        {/* <div className="circle"></div> */}
-      </div>
-    </div>
+    <>
+      {qcount < 6 ? (
+        <div>
+          <TextToVoice text={question} />
+          <Screen
+            startListening={startListening}
+            stopListening={handleStopAndSpeak}
+          />
+          <div className="interviewer">
+            <h1>{question}</h1>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="interviewer">
+            <h1>
+              <h1>Thank You!</h1>
+              <p>
+                We have received your Interview. Our team will contact you soon.
+              </p>
+            </h1>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

@@ -56,3 +56,9 @@
   justify-content: center;
   height: 100vh;
 }
+
+.hr {
+  display: flex;
+  justify-content: end;
+  padding: 2rem;
+}
