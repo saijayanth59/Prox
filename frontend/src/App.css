@@ -46,3 +46,13 @@
 /* .interviewer > .circle {
     align-self: flex-start;
 } */
+
+
+.start {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}

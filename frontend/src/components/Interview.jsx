@@ -1,12 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { Mic, MicOff, TramFront } from "lucide-react";
 import { useVoiceToText } from "react-speakup";
 import TextToVoice from "./TextToVoice";
-import Speech from "react-speech";
 import Screen from "./Screen";
-import ReactTypingEffect from "react-typing-effect";
-// import TypeWriter from "./TypeWriter";
 
 const Interview = () => {
   const { startListening, stopListening, transcript, reset } = useVoiceToText({
@@ -46,7 +42,7 @@ const Interview = () => {
 
   function handleStopAndSpeak() {
     // console.log(transcript);
-    stopListening();
+  
     const fetchData = async () => {
       const res = await axios.post("http://localhost:8000/get-question", {
         conversation: `${conversation} Interviewee: ${transcript}`,
@@ -65,7 +61,10 @@ const Interview = () => {
       updateAudio("http://localhost:8000/stream-mp3");
       reset();
     };
-    fetchData();
+    stopListening();  
+    if(transcript){
+      fetchData();
+    }
   }
   console.log(conversation);
 

@@ -92,7 +92,7 @@ export default function Screen({ startListening, stopListening }) {
         >
           <img src={micImg} alt="" />
         </div>
-        <a href="">
+        <a href="/">
           <div className="control-container" id="leave-btn">
             <img src={phoneImg} alt="" />
           </div>

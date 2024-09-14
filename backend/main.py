@@ -43,13 +43,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# @app.post('/upload')
-# async def create_file(request: Request):
-#     form = await request.form()
-#     with open('audio.wav', 'wb') as f:
-#         f.write(await form['wavfile'].read())
-#     res = get_text()
-#     return {'text': res}
+@app.post('/upload_resume')
+async def create_file(request: Request):
+    form = await request.form()
+    resume_file = await form['resume'].read()
+    print(resume_file)
+    return {"resume": ""}
 
 @app.post('/get-response')
 async def get_response(request: Request):
